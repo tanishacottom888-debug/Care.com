@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Care.com</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            background: #F6F3EE;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            font-weight: 500 700;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'NaN Druid Sans';
+            font-display: swap;
+            font-weight: 550;
+            src: url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff') format('ttf');
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #E8E8E8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo svg {
+            height: 32px;
+            width: 184px;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-right a {
+            color: #1E1E1E;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-right a:hover {
+            color: #025747;
+        }
+
+        .header-right .login-btn {
+            color: #025747;
+            font-weight: 600;
+        }
+
+        .header-right .join-btn {
+            background: #D0F5A3;
+            color: #025747;
+            border: 1px solid #D0F5A3;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .header-right .join-btn:hover {
+            background: #E4FFB8;
+            border-color: #E4FFB8;
+        }
+
+        /* Main */
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .signup-wrapper {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.08);
+            min-height: 600px;
+        }
+
+        .signup-form-section {
+            flex: 1;
+            padding: 40px 48px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .signup-form-section .logo-icon {
+            display: none;
+        }
+
+        .signup-form-section h1 {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 2rem;
+            letter-spacing: -0.03rem;
+            line-height: 2.5rem;
+            margin-bottom: 4px;
+            color: #1E1E1E;
+        }
+
+        .signup-form-section .subtitle {
+            color: #707070;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .signup-form-section .subtitle a {
+            color: #377A69;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-form-section .subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 11px 16px;
+            border-radius: 12px;
+            border: 1px solid #DDDDDD;
+            background: #FFFFFF;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1E1E1E;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .social-btn:hover {
+            background: #F5F5F5;
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .social-btn.google-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .social-btn.facebook-btn {
+            background: #1877F2;
+            border-color: #1877F2;
+            color: #FFFFFF;
+        }
+
+        .social-btn.facebook-btn:hover {
+            background: #1664D8;
+            border-color: #1664D8;
+        }
+
+        .social-btn.apple-btn {
+            background: #1E1E1E;
+            border-color: #1E1E1E;
+            color: #FFFFFF;
+        }
+
+        .social-btn.apple-btn:hover {
+            background: #333333;
+            border-color: #333333;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 12px 0 16px;
+            color: #9B9B9B;
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #DDDDDD;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1E1E1E;
+            margin-bottom: 5px;
+        }
+
+        .form-group .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px 16px;
+            border: 1px solid #DDDDDD;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #FFFFFF;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4D9380;
+            box-shadow: 0 0 0 3px rgba(77, 147, 128, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #9B9B9B;
+        }
+
+        .form-group .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #9B9B9B;
+            padding: 4px;
+        }
+
+        .form-group .toggle-password:hover {
+            color: #1E1E1E;
+        }
+
+        .form-group .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        .password-strength {
+            margin-top: 6px;
+            font-size: 0.75rem;
+            color: #9B9B9B;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .password-strength .strength-bar {
+            flex: 1;
+            height: 4px;
+            background: #DDDDDD;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength .strength-bar .fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .password-strength .strength-bar .fill.weak {
+            background: #EF4D2E;
+            width: 33%;
+        }
+
+        .password-strength .strength-bar .fill.medium {
+            background: #FF9437;
+            width: 66%;
+        }
+
+        .password-strength .strength-bar .fill.strong {
+            background: #4D9380;
+            width: 100%;
+        }
+
+        .form-options {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 4px 0 16px;
+        }
+
+        .form-options input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #4D9380;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .form-options label {
+            font-size: 0.875rem;
+            color: #1E1E1E;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .form-options label a {
+            color: #377A69;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-options label a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 28px;
+            border: none;
+            background: #025747;
+            color: #E4FFB8;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            height: 56px;
+        }
+
+        .submit-btn:hover {
+            background: #377A69;
+        }
+
+        .submit-btn:active {
+            background: #034135;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFFFFF;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .error-message {
+            background: #FEE8E5;
+            color: #C62828;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            margin-bottom: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .error-message svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            fill: #C62828;
+        }
+
+        .success-message {
+            background: #E8F5E9;
+            color: #1B5E20;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            margin-bottom: 14px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        .success-message svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            fill: #1B5E20;
+        }
+
+        .terms-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9B9B9B;
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+
+        .terms-note a {
+            color: #377A69;
+            text-decoration: none;
+        }
+
+        .terms-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right Side - Hero Image */
+        .signup-hero {
+            flex: 1;
+            background: linear-gradient(135deg, #025747 0%, #4D9380 100%);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #FFFFFF;
+            min-height: 400px;
+        }
+
+        .signup-hero .hero-icon {
+            margin-bottom: 24px;
+        }
+
+        .signup-hero .hero-icon svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .signup-hero h2 {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 2rem;
+            line-height: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .signup-hero p {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            opacity: 0.85;
+            max-width: 340px;
+        }
+
+        .signup-hero .stats {
+            margin-top: 28px;
+            display: flex;
+            gap: 32px;
+        }
+
+        .signup-hero .stats .stat {
+            text-align: center;
+        }
+
+        .signup-hero .stats .stat .number {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-size: 2rem;
+            font-weight: 550;
+            display: block;
+        }
+
+        .signup-hero .stats .stat .label {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        /* Footer */
+        .footer {
+            background: #025747;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #D0F5A3;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #D0F5A3;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .signup-wrapper {
+                flex-direction: column;
+                border-radius: 24px;
+            }
+
+            .signup-hero {
+                display: none;
+            }
+
+            .signup-form-section {
+                padding: 28px 20px 24px;
+            }
+
+            .signup-form-section .logo-icon {
+                display: block;
+                text-align: center;
+                margin-bottom: 12px;
+            }
+
+            .signup-form-section .logo-icon svg {
+                width: 48px;
+                height: 48px;
+            }
+
+            .signup-form-section h1 {
+                font-size: 1.75rem;
+                text-align: center;
+            }
+
+            .signup-form-section .subtitle {
+                text-align: center;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header-logo svg {
+                height: 26px;
+                width: 150px;
+            }
+
+            .header-right a {
+                font-size: 0.85rem;
+            }
+
+            .header-right .join-btn {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .signup-form-section {
+                padding: 20px 14px 18px;
+            }
+
+            .social-btn {
+                font-size: 0.85rem;
+                padding: 10px 12px;
+            }
+
+            .form-options {
+                align-items: flex-start;
+            }
+        }
+
+        .focus-outline:focus-visible {
+            outline: 2px solid #4D9380;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <svg viewBox="0 0 229.594 40" aria-label="Care.com logo">
+                <path fill="#cff5a0" d="M31.993 0H8.007C2.803 0 0 2.803 0 7.971v24.022C0 37.198 2.803 40 8.007 40h23.985c5.205 0 8.007-2.803 8.007-8.007V8.007C39.999 2.802 37.196 0 31.992 0Z"></path>
+                <path fill="#025747" d="M20.913 33.485c-8.262 0-13.795-5.86-13.795-13.249S13.269 6.515 22.259 6.515c3.094 0 6.078.801 8.335 2.075l1.419 5.35h-2.147c-1.419-2.548-3.895-4.441-7.607-4.441-5.423 0-9.827 4.077-9.827 9.936 0 5.532 3.931 9.354 9.536 9.354 3.821 0 7.352-1.747 8.771-5.169h2.111c-.91 5.605-4.987 9.863-11.938 9.863Z"></path>
+                <path fill="#025747" d="M23.279 14.231c-1.529 0-3.276 1.456-3.276 4.003 0 2.293 1.383 3.967 3.603 3.967 1.711 0 2.912-.946 3.312-2.22h1.747c-.327 3.203-2.766 5.569-6.26 5.569-3.821 0-6.479-2.839-6.479-6.442 0-3.895 3.13-6.733 6.915-6.733 2.985 0 4.659 1.893 4.659 3.603 0 1.201-.764 2.075-2.002 2.075s-1.856-.873-1.856-1.674.583-1.092.583-1.492-.291-.655-.946-.655Z"></path>
+                <path fill="#fff" d="M174.048 13.874c-5.813 0-9.677 4.011-9.677 9.824s3.863 9.787 9.677 9.787 9.677-4.011 9.677-9.787-3.863-9.824-9.677-9.824m0 17.955c-2.207 0-3.422-2.429-3.422-8.131s1.214-8.168 3.422-8.168 3.422 2.391 3.422 8.168-1.177 8.131-3.422 8.131m-60.784-14.866c0 1.693-1.177 2.87-2.87 2.87-2.208 0-2.503-2.061-3.422-2.061s-1.619 1.84-1.619 5.151V28.7c0 2.281.993 2.833 4.599 2.833v1.472H97.221v-1.472c1.472 0 2.281-.589 2.281-2.207V18.03c0-1.471-.663-2.207-2.281-2.207v-1.472h7.8v4.158c.809-2.87 2.981-4.489 5.151-4.489 1.913 0 3.091 1.25 3.091 2.943ZM93.875 28.959v-8.536c0-4.563-3.422-6.549-7.579-6.549-4.563 0-8.463 2.355-8.463 5.372 0 1.582 1.104 2.502 2.613 2.502s2.502-.957 2.502-2.318c0-1.067-.625-1.545-.625-2.134 0-.92 1.251-1.545 2.686-1.545 1.95 0 3.017 1.177 3.017 2.943s-1.067 2.907-3.238 3.863l-3.643 1.619c-2.575 1.141-3.9 2.686-3.9 4.783 0 2.575 1.987 4.525 5.188 4.525 2.907 0 4.931-1.619 5.703-3.937-.111 2.723 1.545 3.459 3.753 3.459h4.231v-1.472c-1.619 0-2.245-.699-2.245-2.575m-8.648.81c-1.435 0-2.281-.92-2.281-2.318s.809-2.171 2.575-3.054l2.502-1.251v3.606c0 1.839-1.177 3.017-2.797 3.017Zm-11.002-6.881h1.913c-1.251 7.727-6.255 10.597-11.958 10.597-8.021 0-13.393-5.372-13.393-13.246S57.152 6.515 65.799 6.515c3.348 0 5.997.883 7.911 1.84l1.619 6.218h-2.575c-1.251-3.201-3.643-5.298-7.175-5.298-4.709 0-8.536 3.9-8.536 9.493s3.495 9.383 9.015 9.383c3.789 0 7.138-1.767 8.168-5.262Zm86.54 2.025h1.619c-.258 4.857-3.054 8.573-8.61 8.573s-9.383-3.863-9.383-9.456c0-6.255 4.783-10.155 10.376-10.155 4.379 0 6.881 2.429 6.881 4.967 0 1.619-1.067 2.907-2.833 2.907s-2.759-1.214-2.759-2.465.92-1.766.92-2.502c0-.589-.441-1.104-1.619-1.104-2.539 0-5.188 2.429-5.188 6.66 0 3.827 2.171 6.402 5.703 6.402 2.723 0 4.378-1.545 4.893-3.826Zm57.471 6.621v1.472h-10.045v-1.472c1.288 0 2.024-.589 2.024-2.207v-8.058c0-2.686-.773-3.863-2.318-3.863-2.318 0-3.275 2.612-3.275 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-9.787v-1.472c1.287 0 1.987-.589 1.987-2.207v-8.058c0-2.686-.736-3.863-2.281-3.863-2.318 0-3.311 2.612-3.311 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-10.045v-1.472c1.472 0 2.281-.589 2.281-2.207V18.031c0-1.471-.663-2.207-2.281-2.207v-1.472h7.947v3.974c1.067-3.017 3.311-4.452 6.145-4.452s4.673 1.582 5.151 4.415c1.067-3.054 3.348-4.415 6.145-4.415 3.385 0 5.335 2.208 5.335 6.071v9.383h-.001c0 1.618.847 2.207 2.281 2.207Zm-76.714-1.545c0 1.95-1.545 3.495-3.495 3.495s-3.495-1.545-3.495-3.495 1.545-3.495 3.495-3.495 3.495 1.545 3.495 3.495m-18.176-16.115c-5.298 0-9.64 3.79-9.64 9.935s4.084 9.677 9.493 9.677c5.041 0 8.058-3.311 8.463-7.837h-1.545c-.515 1.913-2.429 3.127-4.931 3.127-3.275 0-5.593-2.061-5.777-5.813h12.363c-.037-5.777-3.495-9.088-8.426-9.088Zm0 7.248h-4.011c.147-3.238 1.656-5.593 4.011-5.593 1.987 0 2.98 1.693 2.98 3.385s-1.067 2.207-2.98 2.207Zm94.81-6.77h4.662v.826h-1.876v4.018h-.91v-4.018h-1.876zm11.438 0v4.844h-.854v-3.878c-.154.378-.308.742-.49 1.134l-1.26 2.632h-.77l-1.302-2.688c-.168-.35-.322-.714-.462-1.064v3.864h-.854v-4.844h1.232l1.33 2.772.448 1.036.448-1.036 1.316-2.772z"></path>
+                <title>Care.com logo</title>
+            </svg>
+        </a>
+        <div class="header-right">
+            <a href="index.html">Home</a>
+            <a href="login.html" class="login-btn">Log In</a>
+            <a href="#" style="font-weight:600;color:#025747;background:#D0F5A3;padding:8px 24px;border-radius:20px;">Join Now</a>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div class="main-container">
+        <div class="signup-wrapper">
+            <!-- Sign Up Form -->
+            <div class="signup-form-section">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="20" fill="#D0F5A3"/>
+                        <path d="M20 10C14.48 10 10 14.48 10 20C10 25.52 14.48 30 20 30C25.52 30 30 25.52 30 20C30 14.48 25.52 10 20 10ZM20 27C16.13 27 13 23.87 13 20C13 16.13 16.13 13 20 13C23.87 13 27 16.13 27 20C27 23.87 23.87 27 20 27Z" fill="#025747"/>
+                        <circle cx="20" cy="20" r="3" fill="#025747"/>
+                    </svg>
+                </div>
+
+                <h1>Create your account</h1>
+                <p class="subtitle">Already have an account? <a href="login.html">Log in</a></p>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    <span id="errorText">Please check your information.</span>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span id="successText">Account created! Please check your email.</span>
+                </div>
+
+                <!-- Social Buttons -->
+                <div class="social-buttons">
+                    <button class="social-btn google-btn focus-outline">
+                        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.38-3.09 1.03-4.41l-7.98-6.19C.92 17.29 0 20.55 0 24c0 3.45.92 6.71 2.56 9.59l7.97-7z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        Sign up with Google
+                    </button>
+                    <button class="social-btn facebook-btn focus-outline">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        Sign up with Facebook
+                    </button>
+                    <button class="social-btn apple-btn focus-outline">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Sign up with Apple
+                    </button>
+                </div>
+
+                <div class="divider">or</div>
+
+                <form id="signupForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signupFirstName">First name</label>
+                            <input type="text" id="signupFirstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupLastName">Last name</label>
+                            <input type="text" id="signupLastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email address</label>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="signupPassword" placeholder="Create a strong password" required minlength="8">
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <span>Password strength:</span>
+                            <div class="strength-bar">
+                                <div class="fill" id="strengthFill"></div>
+                            </div>
+                            <span id="strengthLabel">Weak</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupZip">ZIP code</label>
+                        <input type="text" id="signupZip" placeholder="Enter your ZIP code" pattern="[0-9]{5}" inputmode="numeric">
+                    </div>
+                    <div class="form-options">
+                        <input type="checkbox" id="termsCheck" required>
+                        <label for="termsCheck">
+                            I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                            I also agree to receive emails from Care.com.
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-btn focus-outline" id="signupSubmit">
+                        <span class="btn-text">Create Account</span>
+                    </button>
+                </form>
+
+                <p class="terms-note">
+                    By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                </p>
+            </div>
+
+            <!-- Hero Right Side -->
+            <div class="signup-hero">
+                <div class="hero-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="20" fill="#D0F5A3" opacity="0.2"/>
+                        <path d="M20 10C14.48 10 10 14.48 10 20C10 25.52 14.48 30 20 30C25.52 30 30 25.52 30 20C30 14.48 25.52 10 20 10ZM20 27C16.13 27 13 23.87 13 20C13 16.13 16.13 13 20 13C23.87 13 27 16.13 27 20C27 23.87 23.87 27 20 27Z" fill="#D0F5A3"/>
+                        <circle cx="20" cy="20" r="3" fill="#D0F5A3"/>
+                    </svg>
+                </div>
+                <h2>Join millions of families</h2>
+                <p>Create your free account and start connecting with trusted caregivers in your area today.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="number">45M+</span>
+                        <span class="label">Families &amp; caregivers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">4.8★</span>
+                        <span class="label">Average rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Care.com, Inc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <script>
+        // Toggle Password Visibility
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.closest('.input-wrapper').querySelector('input');
+                const isPassword = input.getAttribute('type') === 'password';
+                input.setAttribute('type', isPassword ? 'text' : 'password');
+                const svg = this.querySelector('svg');
+                if (isPassword) {
+                    svg.innerHTML =
+                        '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+                } else {
+                    svg.innerHTML =
+                        '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+                }
+            });
+        });
+
+        // Password Strength
+        const passwordInput = document.getElementById('signupPassword');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthLabel = document.getElementById('strengthLabel');
+
+        if (passwordInput) {
+            passwordInput.addEventListener('input', function() {
+                const val = this.value;
+                let strength = 0;
+                let label = 'Weak';
+                let className = 'weak';
+
+                if (val.length >= 8) strength += 1;
+                if (/[a-z]/.test(val) && /[A-Z]/.test(val)) strength += 1;
+                if (/\d/.test(val)) strength += 1;
+                if (/[^a-zA-Z0-9]/.test(val)) strength += 1;
+
+                if (strength <= 1) { label = 'Weak';
+                    className = 'weak'; } else if (strength === 2) { label = 'Medium';
+                    className = 'medium'; } else if (strength >= 3) { label = 'Strong';
+                    className = 'strong'; }
+
+                strengthFill.className = 'fill ' + className;
+                if (val.length === 0) {
+                    strengthFill.style.width = '0%';
+                    strengthLabel.textContent = '';
+                } else {
+                    strengthFill.style.width = strength <= 1 ? '33%' : strength === 2 ? '66%' : '100%';
+                    strengthLabel.textContent = label;
+                }
+            });
+        }
+
+        // Show/Hide Messages
+        function showError(message) {
+            const el = document.getElementById('errorMessage');
+            document.getElementById('errorText').textContent = message;
+            el.classList.add('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function showSuccess(message) {
+            const el = document.getElementById('successMessage');
+            document.getElementById('successText').textContent = message;
+            el.classList.add('show');
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        // Signup Form Submit
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            hideMessages();
+
+            const firstName = document.getElementById('signupFirstName').value.trim();
+            const lastName = document.getElementById('signupLastName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value.trim();
+            const zip = document.getElementById('signupZip').value.trim();
+            const terms = document.getElementById('termsCheck').checked;
+
+            if (!firstName || !lastName || !email || !password) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('Password must be at least 8 characters.');
+                return;
+            }
+
+            if (!terms) {
+                showError('Please agree to the Terms of Use and Privacy Policy.');
+                return;
+            }
+
+            if (zip && !/^[0-9]{5}$/.test(zip)) {
+                showError('Please enter a valid 5-digit ZIP code.');
+                return;
+            }
+
+            const btn = document.getElementById('signupSubmit');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="btn-text"><span class="spinner"></span> Creating account...</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showSuccess('Account created successfully! Redirecting to login...');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1800);
+            }, 1800);
+        });
+
+        // Enter key support
+        document.querySelectorAll('form input').forEach(input => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const form = this.closest('form');
+                    if (form) {
+                        e.preventDefault();
+                        form.querySelector('button[type="submit"]')?.click();
+                    }
+                }
+            });
+        });
+
+        // Email validation on blur
+        document.querySelectorAll('input[type="email"]').forEach(input => {
+            input.addEventListener('blur', function() {
+                const val = this.value.trim();
+                if (val && (!val.includes('@') || !val.includes('.'))) {
+                    this.style.borderColor = '#EF4D2E';
+                } else {
+                    this.style.borderColor = '#DDDDDD';
+                }
+            });
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#DDDDDD';
+            });
+        });
+    </script>
+
+</body>
+</html>
