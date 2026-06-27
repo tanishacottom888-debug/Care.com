@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah | Caregiver Profile | Care.com</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            background: #F6F3EE;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            font-weight: 500 700;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'NaN Druid Sans';
+            font-display: swap;
+            font-weight: 550;
+            src: url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff') format('ttf');
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #E8E8E8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo svg {
+            height: 32px;
+            width: 184px;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-right a {
+            color: #1E1E1E;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-right a:hover {
+            color: #025747;
+        }
+
+        .header-right .login-btn {
+            color: #025747;
+            font-weight: 600;
+        }
+
+        .header-right .join-btn {
+            background: #D0F5A3;
+            color: #025747;
+            border: 1px solid #D0F5A3;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .header-right .join-btn:hover {
+            background: #E4FFB8;
+            border-color: #E4FFB8;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #FFFFFF;
+            padding: 12px 32px;
+            border-bottom: 1px solid #E8E8E8;
+            font-size: 0.875rem;
+            color: #707070;
+        }
+
+        .breadcrumb a {
+            color: #377A69;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            flex: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 32px;
+            width: 100%;
+        }
+
+        /* Profile Main */
+        .profile-main {
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E8E8E8;
+            overflow: hidden;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 32px;
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid #E8E8E8;
+            position: relative;
+        }
+
+        .profile-header .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 16px;
+            flex-shrink: 0;
+            background-image: url('https://www.care.com/app/vhp/_next/static/media/Sarah.5ef7ecd0.jpg');
+            background-size: cover;
+            background-position: center;
+            background-color: #E8E8E8;
+        }
+
+        .profile-header .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-header .info .name {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 2rem;
+            color: #1E1E1E;
+        }
+
+        .profile-header .info .title {
+            font-size: 1.125rem;
+            color: #707070;
+            margin-top: 4px;
+        }
+
+        .profile-header .info .rating {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .profile-header .info .rating .stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        .profile-header .info .rating .stars svg {
+            width: 20px;
+            height: 20px;
+            fill: #F6BE36;
+        }
+
+        .profile-header .info .rating .stars .empty {
+            fill: #DDDDDD;
+        }
+
+        .profile-header .info .rating .review-count {
+            font-size: 0.95rem;
+            color: #707070;
+        }
+
+        .profile-header .info .rating .badge {
+            background: #D0F5A3;
+            color: #025747;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .profile-header .info .location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            color: #707070;
+            font-size: 0.95rem;
+        }
+
+        .profile-header .info .location svg {
+            width: 18px;
+            height: 18px;
+            fill: #707070;
+        }
+
+        .profile-header .badge-top {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #025747;
+            color: #E4FFB8;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Profile Content */
+        .profile-content {
+            padding: 32px;
+        }
+
+        .profile-content section {
+            margin-bottom: 32px;
+        }
+
+        .profile-content section:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-content section h3 {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            color: #1E1E1E;
+        }
+
+        .profile-content section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1E1E1E;
+        }
+
+        .profile-content .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .profile-content .tags .tag {
+            background: #F6F3EE;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1E1E1E;
+        }
+
+        .profile-content .tags .tag.verified {
+            background: #D0F5A3;
+            color: #025747;
+        }
+
+        .profile-content .tags .tag.cert {
+            background: #AAECF3;
+            color: #025747;
+        }
+
+        /* Experience Timeline */
+        .experience-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid #F6F3EE;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-item .year {
+            font-weight: 600;
+            color: #025747;
+            min-width: 80px;
+        }
+
+        .experience-item .details h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1E1E1E;
+        }
+
+        .experience-item .details p {
+            font-size: 0.9rem;
+            color: #707070;
+            margin-top: 2px;
+        }
+
+        /* Reviews */
+        .review-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #F6F3EE;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-item .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .review-item .review-header .reviewer {
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+
+        .review-item .review-header .reviewer .stars {
+            display: inline-flex;
+            gap: 2px;
+            margin-left: 8px;
+        }
+
+        .review-item .review-header .reviewer .stars svg {
+            width: 14px;
+            height: 14px;
+            fill: #F6BE36;
+        }
+
+        .review-item .review-header .date {
+            font-size: 0.85rem;
+            color: #9B9B9B;
+        }
+
+        .review-item .review-text {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #1E1E1E;
+        }
+
+        /* Sidebar */
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E8E8E8;
+            padding: 24px;
+        }
+
+        .sidebar-card h4 {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #1E1E1E;
+        }
+
+        .sidebar-card .price {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 2rem;
+            color: #025747;
+        }
+
+        .sidebar-card .price span {
+            font-size: 1rem;
+            color: #707070;
+            font-weight: 400;
+        }
+
+        .sidebar-card .price-note {
+            font-size: 0.875rem;
+            color: #707070;
+            margin-top: 4px;
+        }
+
+        .sidebar-card .availability-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #F6F3EE;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-card .availability-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-card .availability-item .day {
+            color: #1E1E1E;
+        }
+
+        .sidebar-card .availability-item .time {
+            color: #707070;
+        }
+
+        .sidebar-card .availability-item .available {
+            color: #4D9380;
+            font-weight: 500;
+        }
+
+        .sidebar-card .availability-item .unavailable {
+            color: #EF4D2E;
+        }
+
+        .contact-btn {
+            width: 100%;
+            padding: 14px;
+            background: #025747;
+            color: #E4FFB8;
+            border: 1px solid #025747;
+            border-radius: 28px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .contact-btn:hover {
+            background: #377A69;
+            border-color: #377A69;
+        }
+
+        .contact-btn.outline {
+            background: transparent;
+            color: #025747;
+        }
+
+        .contact-btn.outline:hover {
+            background: #F6F3EE;
+        }
+
+        .sidebar-card .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .sidebar-card .skill-list .skill {
+            background: #F6F3EE;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: #1E1E1E;
+        }
+
+        /* Footer */
+        .footer {
+            background: #025747;
+            padding: 32px 24px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            color: #D0F5A3;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #D0F5A3;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                padding: 16px 20px;
+                gap: 20px;
+            }
+
+            .profile-sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header-logo svg {
+                height: 26px;
+                width: 150px;
+            }
+
+            .header-right a {
+                font-size: 0.85rem;
+            }
+
+            .header-right .join-btn {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+
+            .breadcrumb {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 24px;
+            }
+
+            .profile-header .avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-header .info .rating {
+                justify-content: center;
+            }
+
+            .profile-header .info .location {
+                justify-content: center;
+            }
+
+            .profile-header .badge-top {
+                position: static;
+                align-self: flex-start;
+                margin-top: 8px;
+            }
+
+            .profile-content {
+                padding: 20px;
+            }
+
+            .profile-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .review-item .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-header .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-header .info .name {
+                font-size: 1.5rem;
+            }
+
+            .profile-content section h3 {
+                font-size: 1rem;
+            }
+
+            .sidebar-card .price {
+                font-size: 1.5rem;
+            }
+        }
+
+        .focus-outline:focus-visible {
+            outline: 2px solid #4D9380;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <svg viewBox="0 0 229.594 40" aria-label="Care.com logo">
+                <path fill="#025747" d="M0 7.971v24.022C0 37.198 2.803 40 8.007 40h23.985c5.205 0 8.007-2.803 8.007-8.007V8.007C39.999 2.802 37.196 0 31.992 0H8.007C2.803 0 0 2.803 0 7.971"></path>
+                <path fill="#cff5a0" d="M25.499 18.053c-1.237 0-1.856-.873-1.856-1.674s.583-1.092.583-1.492-.291-.655-.946-.655c-1.529 0-3.276 1.456-3.276 4.003 0 2.293 1.383 3.967 3.603 3.967 1.711 0 2.912-.946 3.312-2.22h1.747c-.327 3.203-2.766 5.569-6.26 5.569-3.821 0-6.479-2.839-6.479-6.442 0-3.895 3.13-6.733 6.915-6.733 2.985 0 4.659 1.893 4.659 3.603 0 1.201-.764 2.075-2.002 2.075ZM22.26 9.499c-5.423 0-9.827 4.077-9.827 9.936 0 5.532 3.931 9.354 9.536 9.354 3.821 0 7.352-1.747 8.771-5.169h2.111c-.91 5.605-4.987 9.863-11.938 9.863-8.262 0-13.795-5.86-13.795-13.249S13.269 6.513 22.259 6.513c3.094 0 6.078.801 8.335 2.075l1.419 5.35h-2.147c-1.419-2.548-3.895-4.441-7.607-4.441Z"></path>
+                <path fill="#025747" d="M218.236 31.534v1.472h-10.045v-1.472c1.288 0 2.024-.589 2.024-2.207v-8.058c0-2.686-.773-3.863-2.318-3.863-2.318 0-3.275 2.612-3.275 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-9.787v-1.472c1.287 0 1.987-.589 1.987-2.207v-8.058c0-2.686-.736-3.863-2.281-3.863-2.318 0-3.311 2.612-3.311 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-10.045v-1.472c1.472 0 2.281-.589 2.281-2.207V18.031c0-1.471-.663-2.207-2.281-2.207v-1.472h7.947v3.974c1.067-3.017 3.311-4.452 6.145-4.452s4.673 1.582 5.151 4.415c1.067-3.054 3.348-4.415 6.145-4.415 3.385 0 5.335 2.208 5.335 6.071v9.383h-.001c0 1.618.847 2.207 2.281 2.207Zm-122.117.001v1.472h-4.231c-2.207 0-3.863-.736-3.753-3.459-.773 2.318-2.797 3.937-5.703 3.937-3.201 0-5.188-1.95-5.188-4.525 0-2.097 1.325-3.643 3.9-4.783l3.643-1.619c2.171-.957 3.238-2.097 3.238-3.863s-1.067-2.943-3.017-2.943c-1.435 0-2.686.625-2.686 1.545 0 .589.625 1.067.625 2.134 0 1.361-.993 2.318-2.502 2.318s-2.613-.92-2.613-2.502c0-3.017 3.9-5.372 8.463-5.372 4.157 0 7.579 1.987 7.579 6.549v8.536c0 1.876.626 2.575 2.245 2.575m-8.096-4.783v-3.605l-2.502 1.251c-1.766.883-2.575 1.656-2.575 3.054s.847 2.318 2.281 2.318c1.619 0 2.797-1.177 2.797-3.017Zm-21.966 1.397c-5.519 0-9.015-3.789-9.015-9.382s3.827-9.493 8.536-9.493c3.532 0 5.924 2.097 7.175 5.298h2.575l-1.619-6.218c-1.913-.957-4.563-1.84-7.911-1.84-8.647 0-15.012 5.85-15.012 13.724s5.372 13.246 13.393 13.246c5.703 0 10.707-2.87 11.958-10.597h-1.913c-1.03 3.495-4.379 5.261-8.168 5.261Zm44.116-14.129c-2.171 0-4.342 1.619-5.151 4.489v-4.158h-7.8v1.472c1.619 0 2.281.736 2.281 2.207v11.296c0 1.619-.809 2.207-2.281 2.207v1.472h12.731v-1.472c-3.606 0-4.599-.552-4.599-2.833v-5.777c0-3.311.699-5.151 1.619-5.151s1.214 2.061 3.422 2.061c1.693 0 2.87-1.177 2.87-2.87s-1.177-2.943-3.091-2.943Zm27.854 12.474c-1.95 0-3.495 1.545-3.495 3.495s1.545 3.495 3.495 3.495 3.495-1.545 3.495-3.495-1.545-3.495-3.495-3.495m45.698-2.796c0 5.777-3.863 9.787-9.677 9.787s-9.677-3.974-9.677-9.787 3.863-9.824 9.677-9.824 9.677 4.047 9.677 9.824m-6.255 0c0-5.777-1.214-8.168-3.422-8.168s-3.422 2.465-3.422 8.168 1.215 8.131 3.422 8.131c2.245 0 3.422-2.355 3.422-8.131m-21.599 5.041c-3.532 0-5.703-2.576-5.703-6.403 0-4.231 2.649-6.66 5.188-6.66 1.177 0 1.619.515 1.619 1.104 0 .736-.92 1.251-.92 2.502s.993 2.465 2.759 2.465 2.833-1.288 2.833-2.907c0-2.539-2.502-4.967-6.881-4.967-5.593 0-10.376 3.9-10.376 10.155 0 5.593 3.827 9.456 9.383 9.456s8.352-3.716 8.61-8.573h-1.619c-.515 2.281-2.171 3.827-4.893 3.827Zm-24.1-5.777h-12.363c.184 3.753 2.502 5.813 5.777 5.813 2.502 0 4.415-1.214 4.931-3.127h1.545c-.405 4.526-3.422 7.837-8.463 7.837-5.409 0-9.493-3.532-9.493-9.677s4.342-9.935 9.64-9.935c4.93 0 8.389 3.311 8.426 9.088Zm-5.445-4.047c0-1.693-.993-3.385-2.98-3.385-2.355 0-3.863 2.355-4.011 5.593h4.011c1.913 0 2.98-.515 2.98-2.207Zm102.05-4.563-1.316 2.772-.448 1.036-.448-1.036-1.33-2.772h-1.232v4.844h.854v-3.864c.14.35.294.714.462 1.064l1.302 2.688h.77l1.26-2.632c.182-.392.336-.756.49-1.134v3.878h.854v-4.844zm-10.22.826h1.876v4.018h.91v-4.018h1.876v-.826h-4.662z"></path>
+                <title>Care.com logo</title>
+            </svg>
+        </a>
+        <div class="header-right">
+            <a href="index.html">Home</a>
+            <a href="find-care.html">Find Care</a>
+            <a href="login.html" class="login-btn">Log In</a>
+            <a href="signup.html" class="join-btn">Join Now</a>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <a href="find-care.html">Find Care</a>
+        <span>›</span>
+        <span style="color:#1E1E1E;font-weight:500;">Sarah</span>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Profile Main -->
+        <div class="profile-main">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="avatar"></div>
+                <div class="badge-top">⭐ Top Rated</div>
+                <div class="info">
+                    <div class="name">Sarah</div>
+                    <div class="title">Child Care Provider · 10+ years experience</div>
+                    <div class="rating">
+                        <div class="stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                            <svg class="empty" viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                        </div>
+                        <span class="review-count">4.8 (24 reviews)</span>
+                        <span class="badge">✓ Verified</span>
+                    </div>
+                    <div class="location">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Los Angeles, CA · 90210
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- About -->
+                <section>
+                    <h3>About Sarah</h3>
+                    <p>Hello! I'm Sarah, a dedicated and experienced child care provider with over 10 years of experience working with children of all ages. I specialize in infant care and early childhood development. I'm passionate about creating a safe, nurturing, and educational environment where children can thrive and explore their creativity.</p>
+                    <p style="margin-top:12px;">I believe in open communication with parents and strive to provide the best possible care for your little ones. I'm CPR and First Aid certified, and I have a valid driver's license with a clean driving record.</p>
+                </section>
+
+                <!-- Skills & Certifications -->
+                <section>
+                    <h3>Skills & Certifications</h3>
+                    <div class="tags">
+                        <span class="tag verified">✓ Background Check</span>
+                        <span class="tag cert">CPR Certified</span>
+                        <span class="tag cert">First Aid Certified</span>
+                        <span class="tag">Infant Care</span>
+                        <span class="tag">Toddler Care</span>
+                        <span class="tag">Early Childhood Education</span>
+                        <span class="tag">Meal Preparation</span>
+                        <span class="tag">Homework Help</span>
+                        <span class="tag">Special Needs Experience</span>
+                        <span class="tag">Travel with Family</span>
+                    </div>
+                </section>
+
+                <!-- Experience -->
+                <section>
+                    <h3>Work Experience</h3>
+                    <div class="experience-item">
+                        <div class="year">2020 - Present</div>
+                        <div class="details">
+                            <h4>Full-Time Nanny</h4>
+                            <p>Private Family · Los Angeles, CA</p>
+                            <p style="margin-top:4px;color:#1E1E1E;">Caring for two children (3 and 5 years old). Responsible for daily routines, educational activities, meal preparation, and transportation to school and activities.</p>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="year">2016 - 2020</div>
+                        <div class="details">
+                            <h4>Lead Teacher</h4>
+                            <p>Bright Beginnings Preschool · Santa Monica, CA</p>
+                            <p style="margin-top:4px;color:#1E1E1E;">Led a classroom of 12 toddlers (2-3 years old). Developed age-appropriate curriculum, managed daily activities, and communicated regularly with parents about child development.</p>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="year">2012 - 2016</div>
+                        <div class="details">
+                            <h4>After-School Care Provider</h4>
+                            <p>Various Families · Los Angeles, CA</p>
+                            <p style="margin-top:4px;color:#1E1E1E;">Provided after-school care for multiple families. Assisted with homework, organized activities, and ensured a safe and engaging environment for children aged 5-10.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reviews -->
+                <section>
+                    <h3>Reviews (24)</h3>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer">
+                                Jennifer M.
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                            </div>
+                            <span class="date">3 months ago</span>
+                        </div>
+                        <div class="review-text">"Sarah is amazing! She is very interactive with the kids. They ask for her to come back over and over again. She's reliable, punctual, and truly cares about the children she works with. I can't recommend her enough!"</div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer">
+                                Amy V.
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                            </div>
+                            <span class="date">6 months ago</span>
+                        </div>
+                        <div class="review-text">"Sarah was wonderful with our twins. Active, knowledgeable, playful, loving, responsible. We would hire her again in a second. She handled both babies with ease and kept them engaged all day."</div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer">
+                                Mark T.
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                            </div>
+                            <span class="date">1 year ago</span>
+                        </div>
+                        <div class="review-text">"Sarah is a gem! She started caring for our son when he was 6 months old and he absolutely adores her. She's patient, creative, and always comes prepared with fun activities. We feel so lucky to have found her."</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="profile-sidebar">
+            <!-- Pricing Card -->
+            <div class="sidebar-card">
+                <h4>Pricing</h4>
+                <div class="price">$22.50 <span>/ hour</span></div>
+                <div class="price-note">Additional rates for overnight care available</div>
+                <button class="contact-btn focus-outline">Send Message</button>
+                <button class="contact-btn outline focus-outline" style="margin-top:8px;">Save to Favorites</button>
+                <button class="contact-btn outline focus-outline" style="margin-top:8px;">Request Booking</button>
+            </div>
+
+            <!-- Availability Card -->
+            <div class="sidebar-card">
+                <h4>Availability</h4>
+                <div class="availability-item">
+                    <span class="day">Monday</span>
+                    <span class="time available">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Tuesday</span>
+                    <span class="time available">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Wednesday</span>
+                    <span class="time available">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Thursday</span>
+                    <span class="time available">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Friday</span>
+                    <span class="time available">8:00 AM - 6:00 PM</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Saturday</span>
+                    <span class="time unavailable">Unavailable</span>
+                </div>
+                <div class="availability-item">
+                    <span class="day">Sunday</span>
+                    <span class="time unavailable">Unavailable</span>
+                </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div class="sidebar-card">
+                <h4>Quick Facts</h4>
+                <div style="display:flex;flex-direction:column;gap:10px;font-size:0.95rem;">
+                    <div><strong>Experience:</strong> 10+ years</div>
+                    <div><strong>Languages:</strong> English, Spanish</div>
+                    <div><strong>Age groups:</strong> 0-10 years</div>
+                    <div><strong>Transportation:</strong> Yes (has car)</div>
+                    <div><strong>Distance willing to travel:</strong> 15 miles</div>
+                    <div><strong>Background check:</strong> ✓ Verified</div>
+                    <div><strong>First Aid certified:</strong> ✓ Yes</div>
+                </div>
+            </div>
+
+            <!-- Report Card -->
+            <div class="sidebar-card">
+                <h4>Report</h4>
+                <button class="contact-btn outline focus-outline" style="margin-top:0;font-size:0.85rem;padding:8px;">Report Profile</button>
+                <p style="font-size:0.75rem;color:#9B9B9B;margin-top:8px;">Report any inappropriate or suspicious content.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Care.com, Inc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <script>
+        // Contact button
+        document.querySelectorAll('.contact-btn:not(.outline)').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const originalText = this.textContent;
+                this.textContent = 'Sending...';
+                this.disabled = true;
+
+                setTimeout(() => {
+                    this.textContent = '✓ Message Sent!';
+                    this.style.background = '#4D9380';
+                    this.style.borderColor = '#4D9380';
+
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                        this.disabled = false;
+                    }, 2000);
+                }, 1000);
+            });
+        });
+
+        // Save to favorites
+        document.querySelectorAll('.sidebar-card .outline').forEach(btn => {
+            if (btn.textContent.includes('Save')) {
+                btn.addEventListener('click', function() {
+                    if (this.textContent === 'Save to Favorites') {
+                        this.textContent = '✓ Saved!';
+                        this.style.background = '#D0F5A3';
+                        this.style.borderColor = '#D0F5A3';
+                        this.style.color = '#025747';
+                    } else {
+                        this.textContent = 'Save to Favorites';
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                        this.style.color = '';
+                    }
+                });
+            }
+        });
+
+        // Request Booking
+        document.querySelectorAll('.sidebar-card .outline').forEach(btn => {
+            if (btn.textContent.includes('Request')) {
+                btn.addEventListener('click', function() {
+                    const originalText = this.textContent;
+                    this.textContent = 'Sending request...';
+                    this.disabled = true;
+
+                    setTimeout(() => {
+                        this.textContent = '✓ Request Sent!';
+                        this.style.background = '#AAECF3';
+                        this.style.borderColor = '#AAECF3';
+                        this.style.color = '#025747';
+
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.style.background = '';
+                            this.style.borderColor = '';
+                            this.style.color = '';
+                            this.disabled = false;
+                        }, 2000);
+                    }, 1000);
+                });
+            }
+        });
+
+        // Report profile
+        document.querySelector('.sidebar-card .outline:last-child').addEventListener('click', function() {
+            if (confirm('Are you sure you want to report this profile? Please provide details in the next step.')) {
+                this.textContent = '✓ Reported';
+                this.style.background = '#FEE8E5';
+                this.style.borderColor = '#EF4D2E';
+                this.style.color = '#C62828';
+
+                setTimeout(() => {
+                    this.textContent = 'Report Profile';
+                    this.style.background = '';
+                    this.style.borderColor = '';
+                    this.style.color = '';
+                }, 3000);
+            }
+        });
+
+        // Click on review stars (just for demo)
+        document.querySelectorAll('.review-item .stars').forEach(stars => {
+            stars.addEventListener('click', function() {
+                // This is just a fun interactive demo
+                const svgs = this.querySelectorAll('svg');
+                svgs.forEach((svg, index) => {
+                    if (index < 5) {
+                        svg.classList.remove('empty');
+                    }
+                });
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    svgs.forEach((svg, index) => {
+                        if (index === 4) {
+                            svg.classList.add('empty');
+                        }
+                    });
+                }, 2000);
+            });
+        });
+
+        console.log('Profile page loaded successfully!');
+        console.log('Viewing profile for: Sarah');
+    </script>
+
+</body>
+</html>
