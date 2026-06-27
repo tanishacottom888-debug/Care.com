@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Care | Care.com</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            background: #F6F3EE;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            font-weight: 500 700;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'NaN Druid Sans';
+            font-display: swap;
+            font-weight: 550;
+            src: url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff') format('ttf');
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #E8E8E8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo svg {
+            height: 32px;
+            width: 184px;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-right a {
+            color: #1E1E1E;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-right a:hover {
+            color: #025747;
+        }
+
+        .header-right .login-btn {
+            color: #025747;
+            font-weight: 600;
+        }
+
+        .header-right .join-btn {
+            background: #D0F5A3;
+            color: #025747;
+            border: 1px solid #D0F5A3;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .header-right .join-btn:hover {
+            background: #E4FFB8;
+            border-color: #E4FFB8;
+        }
+
+        /* Search Bar */
+        .search-section {
+            background: #FFFFFF;
+            padding: 24px 32px;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        .search-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-container .search-input-wrapper {
+            flex: 2;
+            min-width: 200px;
+            display: flex;
+            background: #F6F3EE;
+            border-radius: 12px;
+            border: 1px solid #DDDDDD;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .search-container .search-input-wrapper:focus-within {
+            border-color: #4D9380;
+            box-shadow: 0 0 0 3px rgba(77, 147, 128, 0.12);
+        }
+
+        .search-container .search-input-wrapper .icon {
+            padding: 12px 8px 12px 16px;
+            color: #9B9B9B;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container .search-input-wrapper .icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-container .search-input-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 16px 12px 4px;
+            font-size: 1rem;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            background: transparent;
+            color: #1E1E1E;
+        }
+
+        .search-container .search-input-wrapper input::placeholder {
+            color: #9B9B9B;
+        }
+
+        .search-container .filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #F6F3EE;
+            border: 1px solid #DDDDDD;
+            border-radius: 12px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1E1E1E;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-container .filter-btn:hover {
+            background: #E8E8E8;
+        }
+
+        .search-container .filter-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .search-container .search-btn {
+            padding: 12px 32px;
+            background: #025747;
+            color: #E4FFB8;
+            border: 1px solid #025747;
+            border-radius: 28px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 120px;
+        }
+
+        .search-container .search-btn:hover {
+            background: #377A69;
+            border-color: #377A69;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            flex: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            display: flex;
+            gap: 32px;
+            width: 100%;
+        }
+
+        /* Filters Sidebar */
+        .filters-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            border: 1px solid #E8E8E8;
+        }
+
+        .filters-sidebar h3 {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+            color: #1E1E1E;
+        }
+
+        .filter-group {
+            margin-bottom: 24px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1E1E1E;
+            margin-bottom: 6px;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #DDDDDD;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            background: #FFFFFF;
+            color: #1E1E1E;
+            transition: border-color 0.2s;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #4D9380;
+            box-shadow: 0 0 0 3px rgba(77, 147, 128, 0.12);
+        }
+
+        .filter-group .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .filter-group .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #4D9380;
+            cursor: pointer;
+        }
+
+        .filter-group .price-range {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-group .price-range input {
+            width: 50%;
+        }
+
+        .filter-group .price-range input::placeholder {
+            font-size: 0.85rem;
+        }
+
+        .filter-apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: #025747;
+            color: #E4FFB8;
+            border: none;
+            border-radius: 28px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .filter-apply-btn:hover {
+            background: #377A69;
+        }
+
+        .filter-clear-btn {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #707070;
+            border: none;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 8px;
+            text-decoration: underline;
+        }
+
+        .filter-clear-btn:hover {
+            color: #1E1E1E;
+        }
+
+        /* Results */
+        .results-section {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .results-header h2 {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 1.5rem;
+            color: #1E1E1E;
+        }
+
+        .results-header .results-count {
+            color: #707070;
+            font-size: 0.95rem;
+        }
+
+        .results-header .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .results-header .sort-options label {
+            font-size: 0.875rem;
+            color: #707070;
+        }
+
+        .results-header .sort-options select {
+            padding: 8px 12px;
+            border: 1px solid #DDDDDD;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            background: #FFFFFF;
+            color: #1E1E1E;
+            cursor: pointer;
+        }
+
+        .results-header .sort-options select:focus {
+            outline: none;
+            border-color: #4D9380;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            background: #F6F3EE;
+            border-radius: 10px;
+            padding: 4px;
+        }
+
+        .view-toggle button {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #707070;
+            transition: all 0.2s;
+        }
+
+        .view-toggle button.active {
+            background: #FFFFFF;
+            color: #1E1E1E;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .view-toggle button:hover:not(.active) {
+            color: #1E1E1E;
+        }
+
+        /* Caregiver Cards Grid */
+        .caregiver-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .caregiver-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E8E8E8;
+            padding: 20px;
+            display: flex;
+            gap: 24px;
+            transition: box-shadow 0.3s, transform 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .caregiver-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .caregiver-card .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            background-color: #E8E8E8;
+        }
+
+        .caregiver-card .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .caregiver-card .info .top {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .caregiver-card .info .name {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #1E1E1E;
+        }
+
+        .caregiver-card .info .name a {
+            color: #1E1E1E;
+            text-decoration: none;
+        }
+
+        .caregiver-card .info .name a:hover {
+            color: #025747;
+        }
+
+        .caregiver-card .info .title {
+            color: #707070;
+            font-size: 0.95rem;
+        }
+
+        .caregiver-card .info .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .caregiver-card .info .rating .stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .caregiver-card .info .rating .stars svg {
+            width: 16px;
+            height: 16px;
+            fill: #F6BE36;
+        }
+
+        .caregiver-card .info .rating .stars .empty {
+            fill: #DDDDDD;
+        }
+
+        .caregiver-card .info .rating .review-count {
+            font-size: 0.875rem;
+            color: #707070;
+        }
+
+        .caregiver-card .info .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .caregiver-card .info .tags .tag {
+            background: #F6F3EE;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #1E1E1E;
+            white-space: nowrap;
+        }
+
+        .caregiver-card .info .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .caregiver-card .info .bottom .price {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #025747;
+        }
+
+        .caregiver-card .info .bottom .price span {
+            font-weight: 400;
+            font-size: 0.875rem;
+            color: #707070;
+        }
+
+        .caregiver-card .info .bottom .contact-btn {
+            padding: 8px 24px;
+            background: #025747;
+            color: #E4FFB8;
+            border: 1px solid #025747;
+            border-radius: 20px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .caregiver-card .info .bottom .contact-btn:hover {
+            background: #377A69;
+            border-color: #377A69;
+        }
+
+        .caregiver-card .info .bottom .contact-btn.outline {
+            background: transparent;
+            color: #025747;
+        }
+
+        .caregiver-card .info .bottom .contact-btn.outline:hover {
+            background: #F6F3EE;
+        }
+
+        .caregiver-card .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #D0F5A3;
+            color: #025747;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .caregiver-card .badge.verified {
+            background: #AAECF3;
+            color: #025747;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 16px 0;
+        }
+
+        .pagination button {
+            padding: 8px 14px;
+            border: 1px solid #DDDDDD;
+            border-radius: 8px;
+            background: #FFFFFF;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #1E1E1E;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination button:hover:not(.active) {
+            background: #F6F3EE;
+            border-color: #B3B3B3;
+        }
+
+        .pagination button.active {
+            background: #025747;
+            color: #E4FFB8;
+            border-color: #025747;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination .dots {
+            padding: 8px 4px;
+            color: #707070;
+        }
+
+        /* Footer */
+        .footer {
+            background: #025747;
+            padding: 32px 24px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            color: #D0F5A3;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #D0F5A3;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Filters Toggle */
+        .mobile-filter-toggle {
+            display: none;
+            padding: 10px 20px;
+            background: #FFFFFF;
+            border: 1px solid #DDDDDD;
+            border-radius: 12px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .mobile-filter-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                padding: 16px 20px;
+                gap: 20px;
+            }
+
+            .filters-sidebar {
+                width: 240px;
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header-logo svg {
+                height: 26px;
+                width: 150px;
+            }
+
+            .header-right a {
+                font-size: 0.85rem;
+            }
+
+            .header-right .join-btn {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+
+            .search-section {
+                padding: 16px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .search-container .search-input-wrapper {
+                width: 100%;
+            }
+
+            .search-container .filter-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-container .search-btn {
+                width: 100%;
+            }
+
+            .main-layout {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .filters-sidebar {
+                width: 100%;
+                position: static;
+                display: none;
+            }
+
+            .filters-sidebar.open {
+                display: block;
+            }
+
+            .mobile-filter-toggle {
+                display: flex;
+            }
+
+            .caregiver-card {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .caregiver-card .avatar {
+                width: 80px;
+                height: 80px;
+                border-radius: 12px;
+            }
+
+            .caregiver-card .badge {
+                position: static;
+                align-self: flex-start;
+                margin-top: 4px;
+            }
+
+            .caregiver-card .info .bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .caregiver-card .info .bottom .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .results-header .sort-options {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .view-toggle {
+                display: none;
+            }
+
+            .caregiver-card .info .top {
+                flex: 1;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .caregiver-card .avatar {
+                width: 60px;
+                height: 60px;
+            }
+
+            .caregiver-card .info .name {
+                font-size: 1rem;
+            }
+
+            .caregiver-card .info .tags .tag {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
+
+            .results-header h2 {
+                font-size: 1.25rem;
+            }
+        }
+
+        .focus-outline:focus-visible {
+            outline: 2px solid #4D9380;
+            outline-offset: 2px;
+        }
+
+        /* Map placeholder */
+        .map-view {
+            display: none;
+            height: 400px;
+            background: #E8E8E8;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+            color: #707070;
+            font-size: 1.125rem;
+            border: 1px solid #DDDDDD;
+        }
+
+        .map-view.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <svg viewBox="0 0 229.594 40" aria-label="Care.com logo">
+                <path fill="#025747" d="M0 7.971v24.022C0 37.198 2.803 40 8.007 40h23.985c5.205 0 8.007-2.803 8.007-8.007V8.007C39.999 2.802 37.196 0 31.992 0H8.007C2.803 0 0 2.803 0 7.971"></path>
+                <path fill="#cff5a0" d="M25.499 18.053c-1.237 0-1.856-.873-1.856-1.674s.583-1.092.583-1.492-.291-.655-.946-.655c-1.529 0-3.276 1.456-3.276 4.003 0 2.293 1.383 3.967 3.603 3.967 1.711 0 2.912-.946 3.312-2.22h1.747c-.327 3.203-2.766 5.569-6.26 5.569-3.821 0-6.479-2.839-6.479-6.442 0-3.895 3.13-6.733 6.915-6.733 2.985 0 4.659 1.893 4.659 3.603 0 1.201-.764 2.075-2.002 2.075ZM22.26 9.499c-5.423 0-9.827 4.077-9.827 9.936 0 5.532 3.931 9.354 9.536 9.354 3.821 0 7.352-1.747 8.771-5.169h2.111c-.91 5.605-4.987 9.863-11.938 9.863-8.262 0-13.795-5.86-13.795-13.249S13.269 6.513 22.259 6.513c3.094 0 6.078.801 8.335 2.075l1.419 5.35h-2.147c-1.419-2.548-3.895-4.441-7.607-4.441Z"></path>
+                <path fill="#025747" d="M218.236 31.534v1.472h-10.045v-1.472c1.288 0 2.024-.589 2.024-2.207v-8.058c0-2.686-.773-3.863-2.318-3.863-2.318 0-3.275 2.612-3.275 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-9.787v-1.472c1.287 0 1.987-.589 1.987-2.207v-8.058c0-2.686-.736-3.863-2.281-3.863-2.318 0-3.311 2.612-3.311 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-10.045v-1.472c1.472 0 2.281-.589 2.281-2.207V18.031c0-1.471-.663-2.207-2.281-2.207v-1.472h7.947v3.974c1.067-3.017 3.311-4.452 6.145-4.452s4.673 1.582 5.151 4.415c1.067-3.054 3.348-4.415 6.145-4.415 3.385 0 5.335 2.208 5.335 6.071v9.383h-.001c0 1.618.847 2.207 2.281 2.207Zm-122.117.001v1.472h-4.231c-2.207 0-3.863-.736-3.753-3.459-.773 2.318-2.797 3.937-5.703 3.937-3.201 0-5.188-1.95-5.188-4.525 0-2.097 1.325-3.643 3.9-4.783l3.643-1.619c2.171-.957 3.238-2.097 3.238-3.863s-1.067-2.943-3.017-2.943c-1.435 0-2.686.625-2.686 1.545 0 .589.625 1.067.625 2.134 0 1.361-.993 2.318-2.502 2.318s-2.613-.92-2.613-2.502c0-3.017 3.9-5.372 8.463-5.372 4.157 0 7.579 1.987 7.579 6.549v8.536c0 1.876.626 2.575 2.245 2.575m-8.096-4.783v-3.605l-2.502 1.251c-1.766.883-2.575 1.656-2.575 3.054s.847 2.318 2.281 2.318c1.619 0 2.797-1.177 2.797-3.017Zm-21.966 1.397c-5.519 0-9.015-3.789-9.015-9.382s3.827-9.493 8.536-9.493c3.532 0 5.924 2.097 7.175 5.298h2.575l-1.619-6.218c-1.913-.957-4.563-1.84-7.911-1.84-8.647 0-15.012 5.85-15.012 13.724s5.372 13.246 13.393 13.246c5.703 0 10.707-2.87 11.958-10.597h-1.913c-1.03 3.495-4.379 5.261-8.168 5.261Zm44.116-14.129c-2.171 0-4.342 1.619-5.151 4.489v-4.158h-7.8v1.472c1.619 0 2.281.736 2.281 2.207v11.296c0 1.619-.809 2.207-2.281 2.207v1.472h12.731v-1.472c-3.606 0-4.599-.552-4.599-2.833v-5.777c0-3.311.699-5.151 1.619-5.151s1.214 2.061 3.422 2.061c1.693 0 2.87-1.177 2.87-2.87s-1.177-2.943-3.091-2.943Zm27.854 12.474c-1.95 0-3.495 1.545-3.495 3.495s1.545 3.495 3.495 3.495 3.495-1.545 3.495-3.495-1.545-3.495-3.495-3.495m45.698-2.796c0 5.777-3.863 9.787-9.677 9.787s-9.677-3.974-9.677-9.787 3.863-9.824 9.677-9.824 9.677 4.047 9.677 9.824m-6.255 0c0-5.777-1.214-8.168-3.422-8.168s-3.422 2.465-3.422 8.168 1.215 8.131 3.422 8.131c2.245 0 3.422-2.355 3.422-8.131m-21.599 5.041c-3.532 0-5.703-2.576-5.703-6.403 0-4.231 2.649-6.66 5.188-6.66 1.177 0 1.619.515 1.619 1.104 0 .736-.92 1.251-.92 2.502s.993 2.465 2.759 2.465 2.833-1.288 2.833-2.907c0-2.539-2.502-4.967-6.881-4.967-5.593 0-10.376 3.9-10.376 10.155 0 5.593 3.827 9.456 9.383 9.456s8.352-3.716 8.61-8.573h-1.619c-.515 2.281-2.171 3.827-4.893 3.827Zm-24.1-5.777h-12.363c.184 3.753 2.502 5.813 5.777 5.813 2.502 0 4.415-1.214 4.931-3.127h1.545c-.405 4.526-3.422 7.837-8.463 7.837-5.409 0-9.493-3.532-9.493-9.677s4.342-9.935 9.64-9.935c4.93 0 8.389 3.311 8.426 9.088Zm-5.445-4.047c0-1.693-.993-3.385-2.98-3.385-2.355 0-3.863 2.355-4.011 5.593h4.011c1.913 0 2.98-.515 2.98-2.207Zm102.05-4.563-1.316 2.772-.448 1.036-.448-1.036-1.33-2.772h-1.232v4.844h.854v-3.864c.14.35.294.714.462 1.064l1.302 2.688h.77l1.26-2.632c.182-.392.336-.756.49-1.134v3.878h.854v-4.844zm-10.22.826h1.876v4.018h.91v-4.018h1.876v-.826h-4.662z"></path>
+                <title>Care.com logo</title>
+            </svg>
+        </a>
+        <div class="header-right">
+            <a href="index.html">Home</a>
+            <a href="get-started.html" class="login-btn">Get Started</a>
+            <a href="login.html" class="login-btn">Log In</a>
+            <a href="signup.html" class="join-btn">Join Now</a>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <span class="icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </span>
+                <input type="text" placeholder="Search by ZIP code, city, or caregiver name" value="90210">
+            </div>
+            <button class="filter-btn focus-outline" onclick="toggleFilters()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
+                Filters
+            </button>
+            <button class="search-btn focus-outline">Search</button>
+        </div>
+    </section>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar" id="filtersSidebar">
+            <h3>Filters</h3>
+
+            <div class="filter-group">
+                <label for="serviceType">Service Type</label>
+                <select id="serviceType">
+                    <option value="all">All Services</option>
+                    <option value="childcare" selected>Child Care</option>
+                    <option value="seniorcare">Senior Care</option>
+                    <option value="petcare">Pet Care</option>
+                    <option value="housekeeping">Housekeeping</option>
+                    <option value="tutoring">Tutoring</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="ZIP code or city" value="90210">
+            </div>
+
+            <div class="filter-group">
+                <label>Availability</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" checked> Weekdays</label>
+                    <label><input type="checkbox"> Weekends</label>
+                    <label><input type="checkbox"> Evenings</label>
+                    <label><input type="checkbox"> Overnight</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="experience">Experience Level</label>
+                <select id="experience">
+                    <option value="any">Any Experience</option>
+                    <option value="1">1+ years</option>
+                    <option value="3" selected>3+ years</option>
+                    <option value="5">5+ years</option>
+                    <option value="10">10+ years</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Price Range (per hour)</label>
+                <div class="price-range">
+                    <input type="text" placeholder="Min" value="$15">
+                    <input type="text" placeholder="Max" value="$35">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Background Check</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" checked> Verified background check</label>
+                    <label><input type="checkbox"> CPR certified</label>
+                    <label><input type="checkbox"> First Aid certified</label>
+                </div>
+            </div>
+
+            <button class="filter-apply-btn focus-outline">Apply Filters</button>
+            <button class="filter-clear-btn">Clear All Filters</button>
+        </aside>
+
+        <!-- Results -->
+        <main class="results-section">
+            <!-- Mobile Filter Toggle -->
+            <button class="mobile-filter-toggle focus-outline" onclick="toggleFilters()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
+                Show Filters
+            </button>
+
+            <!-- Results Header -->
+            <div class="results-header">
+                <div>
+                    <h2>Available Caregivers</h2>
+                    <span class="results-count">156 caregivers found near 90210</span>
+                </div>
+                <div class="sort-options">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort">
+                        <option value="relevance" selected>Relevance</option>
+                        <option value="rating">Rating</option>
+                        <option value="distance">Distance</option>
+                        <option value="price_low">Price: Low to High</option>
+                        <option value="price_high">Price: High to Low</option>
+                    </select>
+                    <div class="view-toggle">
+                        <button class="active" onclick="toggleView('list')" aria-label="List view">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>
+                        </button>
+                        <button onclick="toggleView('map')" aria-label="Map view">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map View -->
+            <div class="map-view" id="mapView">
+                <div style="text-align:center;padding:20px;">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="#707070"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <p style="margin-top:12px;color:#707070;">Map view showing caregivers in your area</p>
+                    <p style="font-size:0.875rem;color:#9B9B9B;">12 caregivers nearby</p>
+                </div>
+            </div>
+
+            <!-- Caregiver Grid -->
+            <div class="caregiver-grid" id="caregiverGrid">
+
+                <!-- Card 1 - Sarah -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('https://www.care.com/app/vhp/_next/static/media/Sarah.5ef7ecd0.jpg');"></div>
+                    <div class="badge verified">Verified</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">Sarah</a></div>
+                                <div class="title">Child Care · 10 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg class="empty" viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(24 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">CPR Certified</span>
+                                <span class="tag">First Aid</span>
+                                <span class="tag">Infant Care</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$22.50 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Allexus -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('https://www.care.com/app/vhp/_next/static/media/Allexus.c9289491.jpg');"></div>
+                    <div class="badge verified">Verified</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">Allexus</a></div>
+                                <div class="title">Newborn Care Specialist · 7 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(18 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">CPR Certified</span>
+                                <span class="tag">Newborn Care</span>
+                                <span class="tag">Sleep Training</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$28.00 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Kelly -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('https://www.care.com/app/vhp/_next/static/media/Kelly.008404a0.jpg');"></div>
+                    <div class="badge verified">Verified</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">Kelly</a></div>
+                                <div class="title">Senior Care · 10 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(31 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">Dementia Care</span>
+                                <span class="tag">Companion Care</span>
+                                <span class="tag">Transportation</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$25.00 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Maria -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23E8E8E8%22 width=%22200%22 height=%22200%22/><text x=%2250%%22 y=%2255%%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%239B9B9B%22>👩</text></svg>');background-color:#E8E8E8;background-size:cover;"></div>
+                    <div class="badge">New</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">Maria</a></div>
+                                <div class="title">Pet Care · 4 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg class="empty" viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(12 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">Dog Walking</span>
+                                <span class="tag">Pet Sitting</span>
+                                <span class="tag">Dog Boarding</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$18.00 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 - James -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23E8E8E8%22 width=%22200%22 height=%22200%22/><text x=%2250%%22 y=%2255%%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%239B9B9B%22>👨</text></svg>');background-color:#E8E8E8;background-size:cover;"></div>
+                    <div class="badge verified">Verified</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">James</a></div>
+                                <div class="title">Tutoring · 8 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg class="empty" viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(19 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">Math</span>
+                                <span class="tag">Science</span>
+                                <span class="tag">SAT Prep</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$32.00 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 - Lisa -->
+                <div class="caregiver-card">
+                    <div class="avatar" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23E8E8E8%22 width=%22200%22 height=%22200%22/><text x=%2250%%22 y=%2255%%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%239B9B9B%22>👩</text></svg>');background-color:#E8E8E8;background-size:cover;"></div>
+                    <div class="badge">New</div>
+                    <div class="info">
+                        <div class="top">
+                            <div>
+                                <div class="name"><a href="#">Lisa</a></div>
+                                <div class="title">Housekeeping · 5 years experience</div>
+                            </div>
+                            <div class="rating">
+                                <div class="stars">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                    <svg class="empty" viewBox="0 0 24 24"><path d="M12 2a1.3 1.3 0 0 0-1.177.748l-2.394 5.1-5.326.814a1.3 1.3 0 0 0-.734 2.193l3.892 3.989-.921 5.648a1.3 1.3 0 0 0 1.912 1.347L12 19.214l4.748 2.625a1.3 1.3 0 0 0 1.378-.075c.407-.287.615-.781.534-1.272l-.921-5.648 3.892-3.989a1.3 1.3 0 0 0-.734-2.193l-5.326-.814-2.394-5.1A1.3 1.3 0 0 0 12 2"/></svg>
+                                </div>
+                                <span class="review-count">(9 reviews)</span>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">✓ Background Check</span>
+                                <span class="tag">Deep Cleaning</span>
+                                <span class="tag">Organizing</span>
+                                <span class="tag">Laundry</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">$20.00 <span>/ hr</span></div>
+                            <button class="contact-btn focus-outline">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button disabled>‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <span class="dots">…</span>
+                <button>8</button>
+                <button>›</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Care.com, Inc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <script>
+        // Toggle Filters (Mobile)
+        function toggleFilters() {
+            const sidebar = document.getElementById('filtersSidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Toggle View (List/Map)
+        let currentView = 'list';
+
+        function toggleView(view) {
+            const mapView = document.getElementById('mapView');
+            const grid = document.getElementById('caregiverGrid');
+            const buttons = document.querySelectorAll('.view-toggle button');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (view === 'map') {
+                mapView.classList.add('active');
+                grid.style.display = 'none';
+                buttons[1].classList.add('active');
+                currentView = 'map';
+            } else {
+                mapView.classList.remove('active');
+                grid.style.display = 'grid';
+                buttons[0].classList.add('active');
+                currentView = 'list';
+            }
+        }
+
+        // Pagination interaction
+        document.querySelectorAll('.pagination button:not(:disabled)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent === '‹' || this.textContent === '›' || this.textContent === '…') return;
+
+                document.querySelectorAll('.pagination button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Scroll to top of results
+                document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Filter apply
+        document.querySelector('.filter-apply-btn').addEventListener('click', function() {
+            // Simulate loading
+            this.textContent = 'Applying...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                this.textContent = 'Apply Filters';
+                this.disabled = false;
+                // Show success feedback
+                const count = document.querySelector('.results-count');
+                count.textContent = '128 caregivers found near 90210';
+                count.style.color = '#025747';
+                setTimeout(() => {
+                    count.style.color = '#707070';
+                }, 1500);
+
+                // Close filters on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('filtersSidebar').classList.remove('open');
+                }
+            }, 800);
+        });
+
+        // Clear filters
+        document.querySelector('.filter-clear-btn').addEventListener('click', function() {
+            document.querySelectorAll('.filter-group select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+            document.querySelectorAll('.filter-group input[type="text"]').forEach(input => {
+                input.value = '';
+            });
+            document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+
+            // Show feedback
+            const count = document.querySelector('.results-count');
+            count.textContent = '156 caregivers found near 90210';
+            count.style.color = '#025747';
+            setTimeout(() => {
+                count.style.color = '#707070';
+            }, 1500);
+
+            // Close filters on mobile
+            if (window.innerWidth <= 768) {
+                document.getElementById('filtersSidebar').classList.remove('open');
+            }
+        });
+
+        // Search button click
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.textContent;
+            btn.textContent = 'Searching...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                // Show results update
+                const count = document.querySelector('.results-count');
+                const current = parseInt(count.textContent);
+                if (current > 100) {
+                    count.textContent = (current - 28) + ' caregivers found near 90210';
+                } else {
+                    count.textContent = (current + 12) + ' caregivers found near 90210';
+                }
+                count.style.color = '#025747';
+                setTimeout(() => {
+                    count.style.color = '#707070';
+                }, 1500);
+            }, 1000);
+        });
+
+        // Enter key on search input
+        document.querySelector('.search-container input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+
+        // Contact button clicks
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const originalText = this.textContent;
+                this.textContent = 'Sending...';
+                this.disabled = true;
+
+                setTimeout(() => {
+                    this.textContent = '✓ Message Sent';
+                    this.style.background = '#4D9380';
+                    this.style.borderColor = '#4D9380';
+
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                        this.disabled = false;
+                    }, 2000);
+                }, 800);
+            });
+        });
+
+        // Click on caregiver card to go to profile
+        document.querySelectorAll('.caregiver-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't navigate if clicking on contact button
+                if (e.target.closest('.contact-btn')) return;
+
+                const name = this.querySelector('.name a').textContent;
+                alert('Navigating to ' + name + '\'s profile...');
+                // window.location.href = 'profile.html';
+            });
+        });
+
+        // Close filters when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('filtersSidebar');
+                const toggleBtn = document.querySelector('.mobile-filter-toggle');
+
+                if (sidebar.classList.contains('open') &&
+                    !sidebar.contains(e.target) &&
+                    !toggleBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        console.log('Find Care page loaded successfully!');
+    </script>
+
+</body>
+</html>
