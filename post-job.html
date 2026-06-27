@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job | Care.com</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            background: #F6F3EE;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Regular.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Oceanic Grotesk';
+            font-display: swap;
+            font-weight: 500 700;
+            src: url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/OceanicGrotesk/OceanicGrotesk-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'NaN Druid Sans';
+            font-display: swap;
+            font-weight: 550;
+            src: url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff2') format('woff2'),
+                url('https://www.care.com/css/cms/font-face/NaNDruid-Sans/NaNDruid-Sans.woff') format('ttf');
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #E8E8E8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo svg {
+            height: 32px;
+            width: 184px;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-right a {
+            color: #1E1E1E;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-right a:hover {
+            color: #025747;
+        }
+
+        .header-right .login-btn {
+            color: #025747;
+            font-weight: 600;
+        }
+
+        .header-right .join-btn {
+            background: #D0F5A3;
+            color: #025747;
+            border: 1px solid #D0F5A3;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .header-right .join-btn:hover {
+            background: #E4FFB8;
+            border-color: #E4FFB8;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #FFFFFF;
+            padding: 12px 32px;
+            border-bottom: 1px solid #E8E8E8;
+            font-size: 0.875rem;
+            color: #707070;
+        }
+
+        .breadcrumb a {
+            color: #377A69;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            flex: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            width: 100%;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 2.25rem;
+            color: #1E1E1E;
+        }
+
+        .page-header p {
+            color: #707070;
+            font-size: 1.125rem;
+            margin-top: 4px;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            position: relative;
+            padding: 0 8px;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 40px;
+            right: 40px;
+            height: 3px;
+            background: #DDDDDD;
+            z-index: 0;
+        }
+
+        .progress-steps .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-steps .step .circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #DDDDDD;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .progress-steps .step.active .circle {
+            background: #025747;
+            color: #E4FFB8;
+        }
+
+        .progress-steps .step.completed .circle {
+            background: #4D9380;
+            color: #FFFFFF;
+        }
+
+        .progress-steps .step .label {
+            font-size: 0.8rem;
+            color: #9B9B9B;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .progress-steps .step.active .label {
+            color: #1E1E1E;
+            font-weight: 600;
+        }
+
+        .progress-steps .step.completed .label {
+            color: #4D9380;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E8E8E8;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .form-card .card-title {
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            color: #1E1E1E;
+        }
+
+        .form-card .card-subtitle {
+            color: #707070;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: #EF4D2E;
+            margin-left: 2px;
+        }
+
+        .form-group .help-text {
+            font-size: 0.8rem;
+            color: #9B9B9B;
+            margin-top: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #DDDDDD;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            color: #1E1E1E;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #FFFFFF;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4D9380;
+            box-shadow: 0 0 0 3px rgba(77, 147, 128, 0.12);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9B9B9B;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 4px;
+        }
+
+        .form-group .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .form-group .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #4D9380;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .form-group .radio-group {
+            display: flex;
+            gap: 24px;
+            padding-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .form-group .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .form-group .radio-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #4D9380;
+            cursor: pointer;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .form-actions .left {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 28px;
+            font-family: 'Oceanic Grotesk', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #025747;
+            color: #E4FFB8;
+            border-color: #025747;
+        }
+
+        .btn-primary:hover {
+            background: #377A69;
+            border-color: #377A69;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1E1E1E;
+            border-color: #DDDDDD;
+        }
+
+        .btn-secondary:hover {
+            background: #F6F3EE;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #025747;
+            border-color: #025747;
+        }
+
+        .btn-outline:hover {
+            background: #F6F3EE;
+        }
+
+        .btn-success {
+            background: #4D9380;
+            color: #FFFFFF;
+            border-color: #4D9380;
+        }
+
+        .btn-success:hover {
+            background: #3D7A69;
+            border-color: #3D7A69;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFFFFF;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #E8F5E9;
+            border: 1px solid #4D9380;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message .icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+        }
+
+        .success-message h3 {
+            font-family: 'NaN Druid Sans', Trebuchet MS, sans-serif;
+            font-weight: 550;
+            font-size: 1.5rem;
+            color: #1B5E20;
+        }
+
+        .success-message p {
+            color: #1E1E1E;
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #025747;
+            padding: 32px 24px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            color: #D0F5A3;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #D0F5A3;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header-logo svg {
+                height: 26px;
+                width: 150px;
+            }
+
+            .header-right a {
+                font-size: 0.85rem;
+            }
+
+            .header-right .join-btn {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+
+            .breadcrumb {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+
+            .main-layout {
+                padding: 20px 16px;
+            }
+
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .progress-steps {
+                padding: 0;
+            }
+
+            .progress-steps .step .label {
+                font-size: 0.65rem;
+            }
+
+            .progress-steps .step .circle {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-actions .left {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+                padding: 12px 20px;
+            }
+
+            .form-group .checkbox-group {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .form-group .radio-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-card {
+                padding: 16px;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .progress-steps .step .label {
+                display: none;
+            }
+        }
+
+        .focus-outline:focus-visible {
+            outline: 2px solid #4D9380;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <svg viewBox="0 0 229.594 40" aria-label="Care.com logo">
+                <path fill="#025747" d="M0 7.971v24.022C0 37.198 2.803 40 8.007 40h23.985c5.205 0 8.007-2.803 8.007-8.007V8.007C39.999 2.802 37.196 0 31.992 0H8.007C2.803 0 0 2.803 0 7.971"></path>
+                <path fill="#cff5a0" d="M25.499 18.053c-1.237 0-1.856-.873-1.856-1.674s.583-1.092.583-1.492-.291-.655-.946-.655c-1.529 0-3.276 1.456-3.276 4.003 0 2.293 1.383 3.967 3.603 3.967 1.711 0 2.912-.946 3.312-2.22h1.747c-.327 3.203-2.766 5.569-6.26 5.569-3.821 0-6.479-2.839-6.479-6.442 0-3.895 3.13-6.733 6.915-6.733 2.985 0 4.659 1.893 4.659 3.603 0 1.201-.764 2.075-2.002 2.075ZM22.26 9.499c-5.423 0-9.827 4.077-9.827 9.936 0 5.532 3.931 9.354 9.536 9.354 3.821 0 7.352-1.747 8.771-5.169h2.111c-.91 5.605-4.987 9.863-11.938 9.863-8.262 0-13.795-5.86-13.795-13.249S13.269 6.513 22.259 6.513c3.094 0 6.078.801 8.335 2.075l1.419 5.35h-2.147c-1.419-2.548-3.895-4.441-7.607-4.441Z"></path>
+                <path fill="#025747" d="M218.236 31.534v1.472h-10.045v-1.472c1.288 0 2.024-.589 2.024-2.207v-8.058c0-2.686-.773-3.863-2.318-3.863-2.318 0-3.275 2.612-3.275 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-9.787v-1.472c1.287 0 1.987-.589 1.987-2.207v-8.058c0-2.686-.736-3.863-2.281-3.863-2.318 0-3.311 2.612-3.311 5.629v6.292c0 1.619.736 2.207 2.024 2.207v1.472h-10.045v-1.472c1.472 0 2.281-.589 2.281-2.207V18.031c0-1.471-.663-2.207-2.281-2.207v-1.472h7.947v3.974c1.067-3.017 3.311-4.452 6.145-4.452s4.673 1.582 5.151 4.415c1.067-3.054 3.348-4.415 6.145-4.415 3.385 0 5.335 2.208 5.335 6.071v9.383h-.001c0 1.618.847 2.207 2.281 2.207Zm-122.117.001v1.472h-4.231c-2.207 0-3.863-.736-3.753-3.459-.773 2.318-2.797 3.937-5.703 3.937-3.201 0-5.188-1.95-5.188-4.525 0-2.097 1.325-3.643 3.9-4.783l3.643-1.619c2.171-.957 3.238-2.097 3.238-3.863s-1.067-2.943-3.017-2.943c-1.435 0-2.686.625-2.686 1.545 0 .589.625 1.067.625 2.134 0 1.361-.993 2.318-2.502 2.318s-2.613-.92-2.613-2.502c0-3.017 3.9-5.372 8.463-5.372 4.157 0 7.579 1.987 7.579 6.549v8.536c0 1.876.626 2.575 2.245 2.575m-8.096-4.783v-3.605l-2.502 1.251c-1.766.883-2.575 1.656-2.575 3.054s.847 2.318 2.281 2.318c1.619 0 2.797-1.177 2.797-3.017Zm-21.966 1.397c-5.519 0-9.015-3.789-9.015-9.382s3.827-9.493 8.536-9.493c3.532 0 5.924 2.097 7.175 5.298h2.575l-1.619-6.218c-1.913-.957-4.563-1.84-7.911-1.84-8.647 0-15.012 5.85-15.012 13.724s5.372 13.246 13.393 13.246c5.703 0 10.707-2.87 11.958-10.597h-1.913c-1.03 3.495-4.379 5.261-8.168 5.261Zm44.116-14.129c-2.171 0-4.342 1.619-5.151 4.489v-4.158h-7.8v1.472c1.619 0 2.281.736 2.281 2.207v11.296c0 1.619-.809 2.207-2.281 2.207v1.472h12.731v-1.472c-3.606 0-4.599-.552-4.599-2.833v-5.777c0-3.311.699-5.151 1.619-5.151s1.214 2.061 3.422 2.061c1.693 0 2.87-1.177 2.87-2.87s-1.177-2.943-3.091-2.943Zm27.854 12.474c-1.95 0-3.495 1.545-3.495 3.495s1.545 3.495 3.495 3.495 3.495-1.545 3.495-3.495-1.545-3.495-3.495-3.495m45.698-2.796c0 5.777-3.863 9.787-9.677 9.787s-9.677-3.974-9.677-9.787 3.863-9.824 9.677-9.824 9.677 4.047 9.677 9.824m-6.255 0c0-5.777-1.214-8.168-3.422-8.168s-3.422 2.465-3.422 8.168 1.215 8.131 3.422 8.131c2.245 0 3.422-2.355 3.422-8.131m-21.599 5.041c-3.532 0-5.703-2.576-5.703-6.403 0-4.231 2.649-6.66 5.188-6.66 1.177 0 1.619.515 1.619 1.104 0 .736-.92 1.251-.92 2.502s.993 2.465 2.759 2.465 2.833-1.288 2.833-2.907c0-2.539-2.502-4.967-6.881-4.967-5.593 0-10.376 3.9-10.376 10.155 0 5.593 3.827 9.456 9.383 9.456s8.352-3.716 8.61-8.573h-1.619c-.515 2.281-2.171 3.827-4.893 3.827Zm-24.1-5.777h-12.363c.184 3.753 2.502 5.813 5.777 5.813 2.502 0 4.415-1.214 4.931-3.127h1.545c-.405 4.526-3.422 7.837-8.463 7.837-5.409 0-9.493-3.532-9.493-9.677s4.342-9.935 9.64-9.935c4.93 0 8.389 3.311 8.426 9.088Zm-5.445-4.047c0-1.693-.993-3.385-2.98-3.385-2.355 0-3.863 2.355-4.011 5.593h4.011c1.913 0 2.98-.515 2.98-2.207Zm102.05-4.563-1.316 2.772-.448 1.036-.448-1.036-1.33-2.772h-1.232v4.844h.854v-3.864c.14.35.294.714.462 1.064l1.302 2.688h.77l1.26-2.632c.182-.392.336-.756.49-1.134v3.878h.854v-4.844zm-10.22.826h1.876v4.018h.91v-4.018h1.876v-.826h-4.662z"></path>
+                <title>Care.com logo</title>
+            </svg>
+        </a>
+        <div class="header-right">
+            <a href="index.html">Home</a>
+            <a href="find-care.html">Find Care</a>
+            <a href="login.html" class="login-btn">Log In</a>
+            <a href="signup.html" class="join-btn">Join Now</a>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <a href="get-started.html">Get Started</a>
+        <span>›</span>
+        <span style="color:#1E1E1E;font-weight:500;">Post a Job</span>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Post a Job</h1>
+            <p>Tell caregivers exactly what you're looking for</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step completed">
+                <div class="circle">✓</div>
+                <span class="label">Job Details</span>
+            </div>
+            <div class="step active">
+                <div class="circle">2</div>
+                <span class="label">Requirements</span>
+            </div>
+            <div class="step">
+                <div class="circle">3</div>
+                <span class="label">Review &amp; Post</span>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <div class="icon">🎉</div>
+            <h3>Your job has been posted!</h3>
+            <p>Caregivers will start applying soon. You can view applications in your dashboard.</p>
+            <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <a href="#" class="btn btn-primary" style="text-decoration:none;">View Applications</a>
+                <a href="find-care.html" class="btn btn-outline" style="text-decoration:none;">Browse Caregivers</a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form id="jobForm" novalidate>
+
+            <!-- Step 1: Job Details -->
+            <div class="form-card" id="step1">
+                <h3 class="card-title">Job Details</h3>
+                <p class="card-subtitle">Tell caregivers about your care needs</p>
+
+                <div class="form-group">
+                    <label>What type of care do you need? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="careType" value="childcare" checked> Child Care</label>
+                        <label><input type="radio" name="careType" value="seniorcare"> Senior Care</label>
+                        <label><input type="radio" name="careType" value="petcare"> Pet Care</label>
+                        <label><input type="radio" name="careType" value="housekeeping"> Housekeeping</label>
+                        <label><input type="radio" name="careType" value="tutoring"> Tutoring</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Job Title <span class="required">*</span></label>
+                    <input type="text" id="jobTitle" placeholder="e.g., Experienced Nanny for 2-year-old" value="Experienced Nanny for 2-year-old" required>
+                    <div class="help-text">Be specific to attract the right caregivers</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobDescription">Job Description <span class="required">*</span></label>
+                    <textarea id="jobDescription" rows="4" placeholder="Describe your care needs, daily routines, and any special requirements..." required>We are looking for a caring and experienced nanny to care for our 2-year-old son. Responsibilities include engaging in age-appropriate activities, preparing meals, maintaining a safe environment, and light housekeeping related to the child. Must be reliable, punctual, and love working with toddlers.</textarea>
+                    <div class="help-text">Include details about schedules, duties, and what makes your family unique</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Location <span class="required">*</span></label>
+                        <input type="text" id="location" placeholder="ZIP code or city" value="90210" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date <span class="required">*</span></label>
+                        <input type="date" id="startDate" value="2026-07-15" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Requirements -->
+            <div class="form-card" id="step2">
+                <h3 class="card-title">Requirements</h3>
+                <p class="card-subtitle">Set your expectations for caregivers</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="payRate">Pay Rate (per hour) <span class="required">*</span></label>
+                        <input type="text" id="payRate" placeholder="e.g., 22.50" value="22.50" required>
+                        <div class="help-text">Average rate in your area is $20-25/hour</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule">Schedule <span class="required">*</span></label>
+                        <select id="schedule" required>
+                            <option value="">Select schedule type</option>
+                            <option value="fulltime" selected>Full-Time (40+ hrs/week)</option>
+                            <option value="parttime">Part-Time (under 30 hrs/week)</option>
+                            <option value="occasional">Occasional / Date Night</option>
+                            <option value="temporary">Temporary / Short-term</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience">Minimum Experience <span class="required">*</span></label>
+                        <select id="experience" required>
+                            <option value="">Select experience level</option>
+                            <option value="1">1+ year</option>
+                            <option value="3" selected>3+ years</option>
+                            <option value="5">5+ years</option>
+                            <option value="10">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Availability <span class="required">*</span></label>
+                        <select id="availability" required>
+                            <option value="">Select availability</option>
+                            <option value="weekdays" selected>Weekdays</option>
+                            <option value="weekends">Weekends</option>
+                            <option value="evenings">Evenings</option>
+                            <option value="overnight">Overnight</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Required Certifications</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" checked> Background Check Verified</label>
+                        <label><input type="checkbox" checked> CPR Certified</label>
+                        <label><input type="checkbox" checked> First Aid Certified</label>
+                        <label><input type="checkbox"> Special Needs Experience</label>
+                        <label><input type="checkbox"> Valid Driver's License</label>
+                        <label><input type="checkbox"> Has Own Transportation</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Skills</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" checked> Meal Preparation</label>
+                        <label><input type="checkbox" checked> Light Housekeeping</label>
+                        <label><input type="checkbox"> Homework Help</label>
+                        <label><input type="checkbox"> Swimming Supervision</label>
+                        <label><input type="checkbox"> Pet Friendly</label>
+                        <label><input type="checkbox"> Travel with Family</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalNotes">Additional Notes</label>
+                    <textarea id="additionalNotes" rows="3" placeholder="Any other requirements or information for applicants...">We have a small dog who is friendly. Must be comfortable with pets. Prefer someone who can start by mid-July.</textarea>
+                </div>
+            </div>
+
+            <!-- Step 3: Review & Post -->
+            <div class="form-card" id="step3">
+                <h3 class="card-title">Review &amp; Post</h3>
+                <p class="card-subtitle">Review your job posting before publishing</p>
+
+                <div style="background:#F6F3EE;border-radius:12px;padding:20px;margin-bottom:16px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.95rem;">
+                        <div><strong>Care Type:</strong> <span id="reviewCareType">Child Care</span></div>
+                        <div><strong>Job Title:</strong> <span id="reviewTitle">Experienced Nanny for 2-year-old</span></div>
+                        <div><strong>Location:</strong> <span id="reviewLocation">90210</span></div>
+                        <div><strong>Start Date:</strong> <span id="reviewStartDate">2026-07-15</span></div>
+                        <div><strong>Pay Rate:</strong> <span id="reviewPayRate">$22.50/hour</span></div>
+                        <div><strong>Schedule:</strong> <span id="reviewSchedule">Full-Time</span></div>
+                        <div><strong>Experience:</strong> <span id="reviewExperience">3+ years</span></div>
+                        <div><strong>Availability:</strong> <span id="reviewAvailability">Weekdays</span></div>
+                    </div>
+                    <div style="margin-top:12px;padding-top:12px;border-top:1px solid #DDDDDD;">
+                        <strong>Description:</strong>
+                        <p style="margin-top:4px;color:#1E1E1E;font-size:0.95rem;" id="reviewDescription">We are looking for a caring and experienced nanny to care for our 2-year-old son. Responsibilities include engaging in age-appropriate activities, preparing meals, maintaining a safe environment, and light housekeeping related to the child. Must be reliable, punctual, and love working with toddlers.</p>
+                    </div>
+                    <div style="margin-top:12px;padding-top:12px;border-top:1px solid #DDDDDD;">
+                        <strong>Additional Notes:</strong>
+                        <p style="margin-top:4px;color:#1E1E1E;font-size:0.95rem;" id="reviewNotes">We have a small dog who is friendly. Must be comfortable with pets. Prefer someone who can start by mid-July.</p>
+                    </div>
+                    <div style="margin-top:12px;padding-top:12px;border-top:1px solid #DDDDDD;">
+                        <strong>Required Certifications:</strong>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">
+                            <span style="background:#D0F5A3;padding:2px 12px;border-radius:12px;font-size:0.85rem;">Background Check</span>
+                            <span style="background:#D0F5A3;padding:2px 12px;border-radius:12px;font-size:0.85rem;">CPR</span>
+                            <span style="background:#D0F5A3;padding:2px 12px;border-radius:12px;font-size:0.85rem;">First Aid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="termsCheck" required>
+                        I confirm that the information provided is accurate and I agree to the <a href="#" style="color:#377A69;text-decoration:none;">Terms of Use</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <div class="left">
+                    <button type="button" class="btn btn-secondary focus-outline" id="backBtn" style="display:none;">← Back</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary focus-outline" id="draftBtn">Save as Draft</button>
+                    <button type="submit" class="btn btn-primary focus-outline" id="postBtn">Post Job</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Care.com, Inc. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <script>
+        // Step Management
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateSteps(step) {
+            const steps = document.querySelectorAll('.progress-steps .step');
+            steps.forEach((el, index) => {
+                el.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    el.classList.add('completed');
+                } else if (index + 1 === step) {
+                    el.classList.add('active');
+                }
+            });
+
+            // Show/hide form cards
+            for (let i = 1; i <= totalSteps; i++) {
+                const card = document.getElementById('step' + i);
+                if (card) {
+                    card.style.display = (i === step) ? 'block' : 'none';
+                }
+            }
+
+            // Show/hide back button
+            document.getElementById('backBtn').style.display = (step > 1) ? 'inline-flex' : 'none';
+
+            // Update post button text
+            const postBtn = document.getElementById('postBtn');
+            if (step === totalSteps) {
+                postBtn.textContent = 'Post Job';
+            } else {
+                postBtn.textContent = 'Next →';
+            }
+
+            // Scroll to top of form
+            document.querySelector('.main-layout').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Next/Previous navigation
+        document.getElementById('postBtn').addEventListener('click', function(e) {
+            if (currentStep < totalSteps) {
+                // Validate current step
+                if (!validateStep(currentStep)) {
+                    return;
+                }
+                currentStep++;
+                updateSteps(currentStep);
+            }
+        });
+
+        document.getElementById('backBtn').addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateSteps(currentStep);
+            }
+        });
+
+        // Form submission
+        document.getElementById('jobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate final step
+            if (!validateStep(3)) {
+                return;
+            }
+
+            // Show loading state
+            const postBtn = document.getElementById('postBtn');
+            const originalText = postBtn.innerHTML;
+            postBtn.innerHTML = '<span class="spinner"></span> Posting...';
+            postBtn.disabled = true;
+
+            // Simulate posting
+            setTimeout(() => {
+                postBtn.innerHTML = originalText;
+                postBtn.disabled = false;
+
+                // Hide form, show success
+                document.getElementById('jobForm').style.display = 'none';
+                document.querySelector('.progress-steps').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+
+                // Scroll to success
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 2000);
+        });
+
+        // Form validation
+        function validateStep(step) {
+            const cards = document.querySelectorAll('.form-card');
+            let valid = true;
+            let firstError = null;
+
+            // Get fields in current step
+            const currentCard = document.getElementById('step' + step);
+            const requiredFields = currentCard.querySelectorAll('[required]');
+
+            requiredFields.forEach(field => {
+                field.style.borderColor = '#DDDDDD';
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#EF4D2E';
+                    valid = false;
+                    if (!firstError) firstError = field;
+                }
+
+                // Check radio/checkbox groups
+                if (field.type === 'radio') {
+                    const name = field.name;
+                    const group = currentCard.querySelectorAll(`input[name="${name}"]`);
+                    const checked = Array.from(group).some(el => el.checked);
+                    if (!checked) {
+                        valid = false;
+                        if (!firstError) firstError = group[0];
+                    }
+                }
+            });
+
+            // Check terms on step 3
+            if (step === 3) {
+                const termsCheck = document.getElementById('termsCheck');
+                if (!termsCheck.checked) {
+                    termsCheck.style.outline = '2px solid #EF4D2E';
+                    valid = false;
+                    if (!firstError) firstError = termsCheck;
+                }
+            }
+
+            if (!valid && firstError) {
+                firstError.focus();
+                // Show error message
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText =
+                    'background:#FEE8E5;color:#C62828;padding:12px 16px;border-radius:12px;font-size:0.9rem;margin-bottom:16px;';
+                errorDiv.innerHTML = '⚠️ Please fill in all required fields.';
+                const card = document.getElementById('step' + step);
+                const existingError = card.querySelector('.form-error');
+                if (existingError) existingError.remove();
+                card.insertBefore(errorDiv, card.firstChild);
+                setTimeout(() => {
+                    if (errorDiv.parentNode) errorDiv.remove();
+                }, 3000);
+            }
+
+            return valid;
+        }
+
+        // Update review section when fields change
+        function updateReview() {
+            const careType = document.querySelector('input[name="careType"]:checked');
+            document.getElementById('reviewCareType').textContent = careType ? careType.value.replace(/([A-Z])/g, ' $1').replace(
+                /^./, str => str.toUpperCase()) : 'Not selected';
+
+            document.getElementById('reviewTitle').textContent = document.getElementById('jobTitle').value || 'Not provided';
+            document.getElementById('reviewLocation').textContent = document.getElementById('location').value || 'Not provided';
+            document.getElementById('reviewStartDate').textContent = document.getElementById('startDate').value || 'Not provided';
+            document.getElementById('reviewPayRate').textContent = '$' + document.getElementById('payRate').value +
+            '/hour' || 'Not provided';
+
+            const scheduleMap = {
+                'fulltime': 'Full-Time',
+                'parttime': 'Part-Time',
+                'occasional': 'Occasional',
+                'temporary': 'Temporary'
+            };
+            const scheduleSelect = document.getElementById('schedule');
+            document.getElementById('reviewSchedule').textContent = scheduleMap[scheduleSelect.value] || 'Not selected';
+
+            const expMap = { '1': '1+ years', '3': '3+ years', '5': '5+ years', '10': '10+ years' };
+            const expSelect = document.getElementById('experience');
+            document.getElementById('reviewExperience').textContent = expMap[expSelect.value] || 'Not selected';
+
+            const availMap = {
+                'weekdays': 'Weekdays',
+                'weekends': 'Weekends',
+                'evenings': 'Evenings',
+                'overnight': 'Overnight',
+                'flexible': 'Flexible'
+            };
+            const availSelect = document.getElementById('availability');
+            document.getElementById('reviewAvailability').textContent = availMap[availSelect.value] || 'Not selected';
+
+            document.getElementById('reviewDescription').textContent = document.getElementById('jobDescription').value ||
+                'Not provided';
+            document.getElementById('reviewNotes').textContent = document.getElementById('additionalNotes').value ||
+                'Not provided';
+        }
+
+        // Update review on input change
+        document.querySelectorAll('#jobForm input, #jobForm select, #jobForm textarea').forEach(el => {
+            el.addEventListener('change', updateReview);
+            el.addEventListener('input', updateReview);
+        });
+
+        // Initialize
+        updateSteps(1);
+        updateReview();
+
+        // Save as Draft
+        document.getElementById('draftBtn').addEventListener('click', function() {
+            this.textContent = '✓ Draft Saved!';
+            this.style.background = '#E8F5E9';
+            this.style.borderColor = '#4D9380';
+            this.style.color = '#1B5E20';
+
+            setTimeout(() => {
+                this.textContent = 'Save as Draft';
+                this.style.background = '';
+                this.style.borderColor = '';
+                this.style.color = '';
+            }, 2000);
+        });
+
+        // Enter key support - advance to next step on Enter in inputs
+        document.querySelectorAll('#jobForm input, #jobForm textarea, #jobForm select').forEach(el => {
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    const btn = document.getElementById('postBtn');
+                    if (btn) btn.click();
+                }
+            });
+        });
+
+        console.log('Post a Job page loaded successfully!');
+    </script>
+
+</body>
+</html>
